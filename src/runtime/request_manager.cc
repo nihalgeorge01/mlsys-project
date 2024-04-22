@@ -2239,9 +2239,10 @@ std::vector<std::pair<BatchConfig::TokenId, int>>
             input_trees,
         int root_depth,
         RequestGuid guid) {
-  assert(input_trees.size() == 1 && "currently using one ssm");
-  dfs_tree_inputs[guid] = input_trees.at(0);
-  return input_trees.at(0);
+  // // OUR CHANGE -- allows multiple ssms
+  // assert(input_trees.size() == 1 && "currently using one ssm");
+  // dfs_tree_inputs[guid] = input_trees.at(0);
+  // return input_trees.at(0);
 
   std::vector<std::pair<BatchConfig::TokenId, int>> merged_tree;
 
