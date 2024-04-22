@@ -139,7 +139,7 @@ class LLM:
     def download_hf_config(self):
         """Save the HuggingFace model configs to a json file. Useful mainly to run the C++ inference code."""
         self.config_dir = os.path.join(
-            os.path.expanduser(self.cache_path), "configs", self.model_name.lower()
+            self.cache_path, "configs", self.model_name.lower()
         )
         self.config_path = os.path.join(self.config_dir, "config.json")
         os.makedirs(self.config_dir, exist_ok=True)
@@ -183,7 +183,7 @@ class LLM:
 
         # Use local cache, or download new version
         self.weights_path = os.path.join(
-            os.path.expanduser(self.cache_path),
+            self.cache_path,
             "weights",
             self.model_name.lower(),
             (
@@ -241,7 +241,7 @@ class LLM:
 
         # Use local cache, or download new version
         self.tokenizer_path = os.path.join(
-            os.path.expanduser(self.cache_path),
+            self.cache_path,
             "tokenizers",
             self.model_name.lower(),
         )
