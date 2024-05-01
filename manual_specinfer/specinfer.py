@@ -204,9 +204,8 @@ for curr_prompt in tqdm(prompts):
         ssm_gen_ids_lst = []
         for i in range(len(ssm_models)):
             ssm_inputs = ssm_tokenizers[i](prompt, return_tensors="pt").to(DEVICE)
-            ssm_generate_ids = ssm_models[i].generate(ssm_inputs.input_ids, max_new_tokens=TREE_DEPTH, generation_config=ssm_generation_configs[i])
+            ssm_generate_ids = ssm_models[i].generate(ssm_inputs.input_ids, max_new_tokens=TREE_DEPTH, generation_config=ssm_generation_configs[i]).clone().detach().cpu().numpy()
             ssm_gen_ids_lst.append(ssm_generate_ids[0,-TREE_DEPTH:])
-            ssm_res = ssm_tokenizers[i].batch_decode(ssm_generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
 
         # Find longest path through SSM tree that coincides with LLM (number of verified tokens)
         tt = TokenTree()
